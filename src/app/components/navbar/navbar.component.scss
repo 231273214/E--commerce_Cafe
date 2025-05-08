@@ -1,35 +1,36 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
+    align-items: flex-start;
     padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 300px;
 
-    .logo {
+    background-image: url('../../assets/images/Fondo_navbar.jpg'); // NO se cambia tu ruta
+    background-size: cover; // Esto asegura que la imagen se vea completa
+    background-repeat: no-repeat;
+    background-position: center;
+
+    .navbar__logo img {
         width: 120px;
         height: auto;
+        margin-top: 0.5rem;
     }
 
     &__links {
         list-style: none;
         display: flex;
         gap: 1.5rem;
-        margin: 0;
-        padding: 0;
-        
-        li {
-            a {
-                text-decoration: none;
-                color: #333333;
-                font-weight: 500;
-                transition: color 0.3s;
+        margin-top: 0.5rem;
 
-                &.active,
-                &:hover {
-                color: #007bff;
-                }
-            }
+    li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+
+        &.active,
+        &:hover {
+            color: #ffcc00;
         }
+    }
     }
 }
