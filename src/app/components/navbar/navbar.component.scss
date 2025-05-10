@@ -5,15 +5,16 @@
     padding: 1rem 2rem;
     height: 300px;
 
-    background-image: url('../../assets/images/Fondo_navbar.jpg'); // NO se cambia tu ruta
-    background-size: cover; // Esto asegura que la imagen se vea completa
+    background-image: url('/Fondo_navbar.jpg'); 
+    background-size: cover; 
     background-repeat: no-repeat;
     background-position: center;
 
     .navbar__logo img {
-        width: 120px;
+        width: 60px;
         height: auto;
         margin-top: 0.5rem;
+        border-radius: 10px;
     }
 
     &__links {

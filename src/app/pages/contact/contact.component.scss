@@ -1,0 +1,88 @@
+.form {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 16px;
+    container-name: form;
+    container-type: inline-size;
+    background-color: #F2F2F2; 
+    animation: aparecer both;
+    animation-timeline: view();
+    animation-range: cover 20% contain 40%;
+  }
+  
+  .form__title {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #222;
+  }
+  
+  .form__form {
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    display: grid;
+    gap: 1.2rem;
+    background-color: #C5906F;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #0001;
+  }
+  
+  .form__input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form__input-container label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  .form__input-container input,
+  .form__input-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form__input-container input:focus,
+  .form__input-container textarea:focus {
+    outline: none;
+    border-color: #ff7f3f; 
+    box-shadow: 0 0 4px #ff7f3f;
+  }
+  
+  .form__input-container textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .form__submit-container {
+    text-align: right;
+  }
+  
+  .form__submit-container input[type="submit"] {
+    background-color: #ff7f3f; 
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form__submit-container input[type="submit"]:hover {
+    background-color: #DF842A; 
+  }
+  

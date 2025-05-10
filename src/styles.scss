@@ -4,6 +4,7 @@ html, body {
     padding: 0;
     display: flex;
     flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
 }
 
     app-root {
@@ -13,5 +14,5 @@ html, body {
 }
 
     main {
-        flex: 1; // Ocupa todo el espacio restante entre navbar y footer
+        flex: 1;
 }
