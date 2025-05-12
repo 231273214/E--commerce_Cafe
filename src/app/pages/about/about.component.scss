@@ -55,58 +55,96 @@
     }
   
     .about__mission-vision {
-        background-color: #f2f2f2;
-        padding: 2rem 1rem;
-        margin-bottom: 3rem;
-      
-        .about__subtitle {
-          text-align: center;
-          font-size: 2rem;
-          margin-bottom: 2rem;
-          color: #000;
-        }
-      
-        .about__mv-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 2rem;
-        }
-      
-        .about__mv-item {
-          background-color: #c68b6d;
-          border-radius: 10px;
-          padding: 1rem;
-          text-align: center;
-          width: 200px;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-      
-        .about__mv-image {
-          background-color: #ffffff;
-          padding: 1rem;
-          border-radius: 6px;
-          margin-bottom: 0.5rem;
-        }
-      
-        .about__mv-image img {
-          width: 100%;
-          height: auto;
-          object-fit: contain;
-        }
-      
-        .about__mv-label {
-          font-size: 1rem;
-          color: #3e2723;
-        }
-      
-        @media (min-width: 768px) {
-          .about__mv-content {
-            flex-direction: row;
-            justify-content: center;
-          }
-        }
-      }
+  background-color: #f2f2f2;
+  padding: 2rem 1rem;
+  margin-bottom: 3rem;
+
+  .about__subtitle {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #000;
+  }
+
+  .about__mv-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    perspective: 1100px;
+  }
+
+  .about__mv-card {
+    position: relative;
+    width: 200px;
+    height: 280px;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+  }
+
+  .about__mv-card:hover {
+    transform: rotateY(180deg);
+  }
+
+  .card__front,
+  .card__back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px #0002;
+    background-color: #fff;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card__front {
+    z-index: 2;
+    transform: rotateY(0deg);
+  }
+
+  .card__back {
+    transform: rotateY(180deg);
+    text-align: center;
+    color: #333;
+    padding: 1rem;
+    background-color: #c68b6d;
+  }
+
+  .card__worker {
+    max-width: 100px;
+    margin-bottom: 0.5rem;
+  }
+
+  .card__worker img {
+    width: 100%;
+    height: auto;
+  }
+
+  .card__data span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #3e2723;
+  }
+
+  .card__back span {
+    font-size: 1rem;
+    line-height: 1.3;
+    color: #fff;
+  }
+
+  @media (min-width: 768px) {
+    .about__mv-content {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}
+
       
       
   
