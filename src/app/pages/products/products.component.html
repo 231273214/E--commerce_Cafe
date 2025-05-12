@@ -1,1 +1,70 @@
-<p>products works!</p>
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h2>Café funcional con hongos adaptógenos</h2>
+    <p class="lead">
+      Disfruta café colombiano de alta calidad fusionado con poderosos nootrópicos y adaptógenos que impulsan tu enfoque, memoria y bienestar.
+    </p>
+  </div>
+<br>
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-6 mb-2">
+      <input type="text" class="form-control" placeholder="Buscar productos..." [(ngModel)]="searchQuery" (input)="search()">
+    </div>
+    <div class="col-md-3 mb-2">
+      <select class="form-select" [(ngModel)]="sortOption" (change)="search()">
+        <option value="">Ordenar por</option>
+        <option value="price">Precio</option>
+        <option value="name">Nombre</option>
+      </select>
+    </div>
+  </div>
+
+  <h4>Concentración</h4>
+  <p>Productos pensados para enfoque, productividad y presencia mental:</p>
+  <div class="row mb-4">
+    <div class="col-md-4 mb-4" *ngFor="let product of filteredByCategory('concentracion')">
+      <div class="card h-100 shadow">
+        <img [src]="product.image" class="card-img-top" [alt]="product.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="text-muted"><strong>{{ product.benefit }}</strong></p>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text"><strong>${{ product.price | number }}</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4>Memoria</h4>
+  <p>Productos que estimulan la retención, aprendizaje y agudeza cognitiva:</p>
+  <div class="row mb-4">
+    <div class="col-md-4 mb-4" *ngFor="let product of filteredByCategory('memoria')">
+      <div class="card h-100 shadow">
+        <img [src]="product.image" class="card-img-top" [alt]="product.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="text-muted"><strong>{{ product.benefit }}</strong></p>
+          <p class="card-text"><strong>${{ product.price | number }}</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4>Claridad mental</h4>
+  <p>Para limpieza mental, reducción de neblina mental (brain fog) y mayor lucidez:</p>
+  <div class="row mb-4">
+    <div class="col-md-4 mb-4" *ngFor="let product of filteredByCategory('claridad')">
+      <div class="card h-100 shadow">
+        <img [src]="product.image" class="card-img-top" [alt]="product.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="text-muted"><strong>{{ product.benefit }}</strong></p>
+          <p class="card-text"><strong>${{ product.price | number }}</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

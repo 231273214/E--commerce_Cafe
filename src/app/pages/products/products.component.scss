@@ -1,0 +1,43 @@
+
+:host {
+  display: block;
+  background-color: #f6f2ed; /* tono beige claro */
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input.form-control {
+  border: 2px solid #a47148;
+  border-radius: 8px;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fffaf5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  color: #5e3c1c;
+  font-weight: 600;
+}
+
+.card-text {
+  color: #3a2e25;
+}
+
+strong {
+  color: #a47148;
+}
