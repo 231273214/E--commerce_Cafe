@@ -1,0 +1,43 @@
+<div class="notify">
+  <div class="notify__backdrop" (click)="closed.emit()"></div>
+
+  <div class="notify__dialog" role="dialog" aria-modal="true" aria-labelledby="notify-title">
+    <button type="button" class="notify__close" aria-label="Cerrar" (click)="closed.emit()">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    </button>
+
+    @if (subscription(); as sub) {
+      <h2 id="notify-title" class="notify__title">¡Listo, te avisaremos!</h2>
+      <p class="notify__text">
+        Cuando <strong>{{ target().name }}</strong> esté disponible, te escribiremos a
+        <strong>{{ sub.email }}</strong>.
+      </p>
+
+      <div class="notify__actions">
+        <button #firstFocus type="button" class="cf-btn cf-btn--primary" (click)="closed.emit()">
+          Entendido
+        </button>
+        <button type="button" class="cf-btn" (click)="unsubscribe()">Quitar aviso</button>
+      </div>
+    } @else {
+      <h2 id="notify-title" class="notify__title">Aún no está disponible</h2>
+      <p class="notify__text">
+        <strong>{{ target().name }}</strong> saldrá a la venta muy pronto. Déjanos tu correo y te
+        avisamos cuando esté disponible.
+      </p>
+
+      <form class="notify__form" [formGroup]="form" (ngSubmit)="subscribe()" novalidate>
+        <div class="cf-field">
+          <label for="notify-email">Correo electrónico</label>
+          <input #firstFocus id="notify-email" type="email" formControlName="email" placeholder="tucorreo@ejemplo.com"
+                 autocomplete="email" [attr.aria-invalid]="hasError()" />
+          @if (hasError()) {
+            <p class="cf-field__error" role="alert">Ingresa un correo válido.</p>
+          }
+        </div>
+
+        <button type="submit" class="cf-btn cf-btn--primary">Avisarme</button>
+      </form>
+    }
+  </div>
+</div>

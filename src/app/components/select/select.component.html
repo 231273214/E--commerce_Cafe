@@ -1,0 +1,43 @@
+<div class="select" [class.select--open]="isOpen()">
+  <button
+    type="button"
+    class="select__trigger"
+    role="combobox"
+    aria-haspopup="listbox"
+    [attr.aria-label]="ariaLabel() || null"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-controls]="listId"
+    [attr.aria-activedescendant]="isOpen() ? listId + '-' + activeIndex() : null"
+    (click)="onClick($event)"
+    (keydown)="onKeydown($event)"
+  >
+    <span class="select__value">{{ buttonLabel() }}</span>
+    <svg class="select__arrow" viewBox="0 0 12 8" aria-hidden="true">
+      <path d="M1 1.5l5 5 5-5" />
+    </svg>
+  </button>
+
+  @if (isOpen()) {
+    <ul class="select__list" role="listbox" [id]="listId" (mousedown)="$event.preventDefault()">
+      @for (option of options(); track option.value; let i = $index) {
+        <li
+          class="select__option"
+          role="option"
+          [id]="listId + '-' + i"
+          [class.select__option--active]="i === activeIndex()"
+          [class.select__option--selected]="option.value === value()"
+          [attr.aria-selected]="option.value === value()"
+          (mouseenter)="activeIndex.set(i)"
+          (click)="select(i)"
+        >
+          {{ option.label }}
+          @if (option.value === value()) {
+            <svg class="select__check" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12.5l4.5 4.5L19 7.5" />
+            </svg>
+          }
+        </li>
+      }
+    </ul>
+  }
+</div>

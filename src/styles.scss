@@ -1,11 +1,29 @@
-@import "bootstrap/scss/bootstrap";
-html, body {
-  height: 100%;
+@use "bootstrap/scss/bootstrap";
+
+:root {
+  --color-brown: #3A2318;
+  --color-blue: #9CCBE0;
+  --color-tan: #C8B48A;
+  --color-cream: #F1ECE1;
+
+  --color-surface: color-mix(in srgb, var(--color-tan) 40%, var(--color-cream));
+
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Quicksand', sans-serif;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-brown);
+  font-family: var(--font-body);
+}
 
 app-root {
   display: flex;
@@ -17,7 +35,96 @@ main {
   flex: 1;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: 'Playfair Display', serif;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-brown);
 }
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+.page-banner {
+  height: clamp(140px, 22vw, 320px);
+  background: var(--color-tan) url('/Fondo_navbar.jpg') center / cover no-repeat;
+}
+
+.cf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.7rem 1.1rem;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--color-cream);
+  box-shadow: 0 1px 4px rgba(58, 35, 24, 0.25);
+  color: var(--color-brown);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-blue);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  &--primary {
+    background-color: var(--color-brown);
+    color: var(--color-cream);
+    box-shadow: none;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-blue);
+      color: var(--color-brown);
+    }
+  }
+}
+
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  label {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--color-brown);
+    border-radius: 6px;
+    background-color: var(--color-cream);
+    color: var(--color-brown);
+    font-family: var(--font-body);
+    font-size: 1rem;
+
+    &[aria-invalid='true'] {
+      border-color: #9b2c1f;
+    }
+  }
+
+  &__error {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #9b2c1f;
+  }
+}
+
+::placeholder {
+  color: color-mix(in srgb, var(--color-brown) 70%, var(--color-cream));
+  opacity: 1;
 }

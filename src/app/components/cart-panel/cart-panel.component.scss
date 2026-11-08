@@ -1,0 +1,262 @@
+.cart {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(58, 35, 24, 0.45);
+    animation: fade-in 0.25s ease;
+  }
+
+  &__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 420px);
+    background-color: var(--color-cream);
+    box-shadow: -8px 0 24px rgba(58, 35, 24, 0.2);
+    animation: slide-in 0.3s ease;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-tan);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  &__close {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-brown);
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(156, 203, 224, 0.35);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+  }
+
+  &__empty,
+  &__success {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding: 1.5rem 1.25rem;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__empty {
+    text-align: center;
+  }
+
+  &__list {
+    flex: 1;
+    min-height: 0;
+    margin: 0;
+    padding: 0 1.25rem;
+    overflow-y: auto;
+    list-style: none;
+  }
+
+  &__footer {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--color-tan);
+  }
+
+  &__total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    strong {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__checkout {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  &__fields {
+    display: grid;
+    flex: 1;
+    gap: 1rem;
+    align-content: start;
+    padding: 1.5rem 1.25rem;
+    overflow-y: auto;
+  }
+
+  &__summary {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  &__note {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.75;
+  }
+}
+
+// ---------- Producto dentro del carrito ----------
+.cart-item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-tan);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &__img {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    background-color: var(--color-surface);
+    object-fit: contain;
+  }
+
+  &__name {
+    margin: 0 0 0.15rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  &__desc {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  &__unit {
+    margin: 0 0 0.5rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+
+  &__side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &__remove {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-brown);
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(156, 203, 224, 0.35);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+
+  &__total {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-brown);
+  border-radius: 6px;
+
+  button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(156, 203, 224, 0.35);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+
+  span {
+    min-width: 28px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart__panel,
+  .cart__backdrop {
+    animation: none;
+  }
+}

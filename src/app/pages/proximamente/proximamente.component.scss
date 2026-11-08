@@ -1,0 +1,240 @@
+@use "../../../styles/mixins" as *;
+
+// ---------- Intro ----------
+.upcoming {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+
+  @include up(md) {
+    padding: 0 2rem 4rem;
+  }
+
+  &__intro {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 2rem;
+    text-align: center;
+  }
+
+  &__heading {
+    margin: 0 0 0.5rem;
+    font-size: 1.35rem;
+    font-weight: 600;
+
+    @include up(md) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__lead {
+    margin: 0;
+    font-size: 0.9rem;
+
+    @include up(md) {
+      font-size: 1rem;
+    }
+  }
+
+  &__section {
+    margin-bottom: 3rem;
+
+    @include up(md) {
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__title {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    margin: 0 0 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include up(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include up(lg) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+}
+
+// ---------- Tarjeta ----------
+.tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(58, 35, 24, 0.15);
+  }
+
+  &__media {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 5 / 4;
+    padding: 1rem;
+    background-color: color-mix(in srgb, var(--color-tan) 30%, var(--color-cream));
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem 1.25rem;
+
+    &--row {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.25rem 0 0;
+    font-size: 0.8rem;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+  }
+
+  &__price {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    &--spaced {
+      margin-top: 0.5rem;
+    }
+  }
+
+  // Botón "+"
+  &__add {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background-color: var(--color-brown);
+    color: var(--color-cream);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background-color: var(--color-blue);
+      color: var(--color-brown);
+    }
+
+    &--active {
+      background-color: var(--color-blue);
+      color: var(--color-brown);
+    }
+  }
+
+  // Máquinas: info a la izquierda, beneficios a la derecha
+  &__split {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 0.75rem;
+  }
+
+  &__perks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0 0 0 0.75rem;
+    border-left: 1px solid var(--color-brown);
+    list-style: none;
+    font-size: 0.75rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+  }
+
+  &__more {
+    align-self: flex-end;
+    margin-top: auto;
+    padding: 0.5rem 0.9rem;
+    border: 0;
+    border-radius: 8px;
+    background-color: var(--color-cream);
+    box-shadow: 0 1px 4px rgba(58, 35, 24, 0.25);
+    color: var(--color-brown);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--color-blue);
+    }
+  }
+}
+
+.icon {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

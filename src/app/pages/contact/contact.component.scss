@@ -1,88 +1,182 @@
-.form {
-    min-height: 60vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 16px;
-    container-name: form;
-    container-type: inline-size;
-    background-color: #F2F2F2; 
-    animation: aparecer both;
-    animation-timeline: view();
-    animation-range: cover 20% contain 40%;
+@use "../../../styles/mixins" as *;
+
+.contact {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+
+  @include up(md) {
+    padding: 3rem 2rem 4rem;
   }
-  
-  .form__title {
-    font-size: 2.4rem;
-    margin-bottom: 1.5rem;
-    font-family: 'Montserrat', sans-serif;
-    color: #222;
+
+  &__heading {
+    margin: 0 0 2rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    @include up(md) {
+      margin-bottom: 3rem;
+      font-size: 1.5rem;
+    }
   }
-  
-  .form__form {
-    padding: 20px;
-    max-width: 600px;
-    width: 100%;
+
+  &__layout {
     display: grid;
-    gap: 1.2rem;
-    background-color: #C5906F;
-    border-radius: 12px;
-    box-shadow: 0 0 10px #0001;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+
+    @include up(md) {
+      grid-template-columns: 1fr 1.5fr;
+      gap: 3rem;
+      align-items: start;
+    }
   }
-  
-  .form__input-container {
+
+  // ---------- Información ----------
+  &__title {
+    margin: 0 0 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  &__text {
+    max-width: 380px;
+    margin: 0 0 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  &__social {
     display: flex;
-    flex-direction: column;
+    gap: 1rem;
+    max-width: 380px;
+    margin: 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--color-tan);
+    list-style: none;
+
+    a {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: var(--color-brown);
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: rgba(156, 203, 224, 0.35);
+      }
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
   }
-  
-  .form__input-container label {
-    margin-bottom: 6px;
-    font-weight: 600;
+
+  // ---------- Formulario ----------
+  &__form {
+    display: grid;
+    gap: 1.1rem;
+    padding: 1.25rem;
+    border-radius: 12px;
+    background-color: var(--color-surface);
+
+    @include up(md) {
+      padding: 1.75rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+  }
+
+  &__submit {
+    padding: 0.65rem 1.1rem;
+    border: 0;
+    border-radius: 8px;
+    background-color: var(--color-cream);
+    box-shadow: 0 1px 4px rgba(58, 35, 24, 0.25);
+    color: var(--color-brown);
+    font-family: var(--font-body);
     font-size: 0.95rem;
-    color: #333;
-  }
-  
-  .form__input-container input,
-  .form__input-container textarea {
-    width: 100%;
-    padding: 10px 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #fff;
-    font-family: inherit;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .form__input-container input:focus,
-  .form__input-container textarea:focus {
-    outline: none;
-    border-color: #ff7f3f; 
-    box-shadow: 0 0 4px #ff7f3f;
-  }
-  
-  .form__input-container textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-  
-  .form__submit-container {
-    text-align: right;
-  }
-  
-  .form__submit-container input[type="submit"] {
-    background-color: #ff7f3f; 
-    color: #fff;
-    font-weight: 600;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 6px;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-blue);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
   }
-  
-  .form__submit-container input[type="submit"]:hover {
-    background-color: #DF842A; 
+
+  &__feedback {
+    margin: 0;
+    font-size: 0.85rem;
+
+    &--error {
+      color: #9b2c1f;
+    }
   }
-  
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+
+  @include up(sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  label {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--color-brown);
+    border-radius: 6px;
+    background-color: var(--color-cream);
+    color: var(--color-brown);
+    font-family: var(--font-body);
+    font-size: 1rem; // 16px evita el zoom automático en iOS
+
+    &[aria-invalid='true'] {
+      border-color: #9b2c1f;
+    }
+  }
+
+  textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  &__error {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #9b2c1f;
+  }
+}

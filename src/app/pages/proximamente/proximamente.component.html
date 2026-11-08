@@ -1,0 +1,157 @@
+<div class="page-banner" aria-hidden="true"></div>
+
+<section class="upcoming__intro">
+  <h1 class="upcoming__heading">Nuevos productos</h1>
+  <p class="upcoming__lead">
+    Lo que verás aquí son nuestros nuevos productos que estarán a la venta en cuestión de días, espera para ver la magia del café.
+  </p>
+</section>
+
+<div class="upcoming">
+  <!-- Cápsulas -->
+  <section class="upcoming__section">
+    <h2 class="upcoming__title">Cápsulas</h2>
+    <p class="upcoming__subtitle">Nueva presentación de nuestro café, ahora en cápsulas</p>
+
+    <div class="upcoming__grid">
+      @for (item of capsules; track item.id) {
+        <article class="tile">
+          <div class="tile__media">
+            @if (item.image) {
+              <img [src]="item.image" [alt]="item.name" loading="lazy" />
+            }
+          </div>
+
+          <div class="tile__body">
+            <h3 class="tile__name">{{ item.name }}</h3>
+            <p class="tile__text">{{ item.description }}</p>
+            <p class="tile__meta">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 8h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8z" />
+                <path d="M17 9h2a2 2 0 0 1 0 4h-2" />
+                <path d="M8 3v2M12 3v2" />
+              </svg>
+              {{ item.size }}
+            </p>
+
+            <div class="tile__footer">
+              <p class="tile__price">{{ formatPrice(item.price) }}</p>
+              <button
+                type="button"
+                class="tile__add"
+                [class.tile__add--active]="isNotifying('capsula-' + item.id)"
+                [attr.aria-label]="notifyLabel('capsula-' + item.id, item.name)"
+                aria-haspopup="dialog"
+                (click)="openNotify('capsula-' + item.id, item.name)"
+              >
+                <span aria-hidden="true">{{ isNotifying('capsula-' + item.id) ? '✓' : '+' }}</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- Máquinas -->
+  <section class="upcoming__section">
+    <h2 class="upcoming__title">Máquinas</h2>
+    <p class="upcoming__subtitle">Máquinas hechas a la medida para sus necesidades del día a día</p>
+
+    <div class="upcoming__grid">
+      @for (item of machines; track item.id) {
+        <article class="tile">
+          <div class="tile__media">
+            @if (item.image) {
+              <img [src]="item.image" [alt]="item.name" loading="lazy" />
+            }
+          </div>
+
+          <div class="tile__body">
+            <div class="tile__split">
+              <div class="tile__info">
+                <h3 class="tile__name">{{ item.name }}</h3>
+                <p class="tile__text">{{ item.description }}</p>
+                <p class="tile__price tile__price--spaced">{{ formatPrice(item.price) }}</p>
+              </div>
+
+              <ul class="tile__perks">
+                @for (perk of item.perks; track perk.label) {
+                  <li>
+                    @switch (perk.icon) {
+                      @case ('truck') {
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M1 6h13v9H1zM14 9h4l3 3v3h-7z" />
+                          <circle cx="6" cy="17" r="2" />
+                          <circle cx="17" cy="17" r="2" />
+                        </svg>
+                      }
+                      @case ('shield') {
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
+                          <path d="M8.5 12l2.5 2.5 4.5-5" />
+                        </svg>
+                      }
+                      @case ('gift') {
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                          <rect x="3" y="8" width="18" height="13" rx="1" />
+                          <path d="M12 8v13M3 12h18" />
+                          <path d="M12 8C10 4 6 4 6 6.5S10 8 12 8zM12 8c2-4 6-4 6-1.5S14 8 12 8z" />
+                        </svg>
+                      }
+                    }
+                    {{ perk.label }}
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <button type="button" class="tile__more" aria-haspopup="dialog"
+              (click)="openNotify('maquina-' + item.id, item.name)">
+                Ver más detalles
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- Copas, vasos y cucharas -->
+  <section class="upcoming__section">
+    <h2 class="upcoming__title">Copas, vasos y cucharas</h2>
+    <p class="upcoming__subtitle">Vasos hechos a la medida para sus necesidades del día a día</p>
+
+    <div class="upcoming__grid">
+      @for (item of accessories; track item.id) {
+        <article class="tile">
+          <div class="tile__media">
+            @if (item.image) {
+              <img [src]="item.image" [alt]="item.name" loading="lazy" />
+            }
+          </div>
+
+          <div class="tile__body tile__body--row">
+            <div>
+              <h3 class="tile__name">{{ item.name }}</h3>
+              <p class="tile__price tile__price--spaced">{{ formatPrice(item.price) }}</p>
+            </div>
+            <button
+              type="button"
+              class="tile__add"
+              [class.tile__add--active]="isNotifying('accesorio-' + item.id)"
+              [attr.aria-label]="notifyLabel('accesorio-' + item.id, item.name)"
+              aria-haspopup="dialog"
+              (click)="openNotify('accesorio-' + item.id, item.name)"
+            >
+              <span aria-hidden="true">{{ isNotifying('accesorio-' + item.id) ? '✓' : '+' }}</span>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</div>
+
+@if (selected(); as target) {
+  <app-notify-dialog [target]="target" (closed)="closeNotify()" />
+}
