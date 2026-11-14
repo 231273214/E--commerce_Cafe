@@ -1,49 +1,45 @@
 <section class="hero">
+  <div class="hero__banner" aria-hidden="true"></div>
+
+  <div class="hero__content">
     <h1 class="hero__title">Café funcional con hongos adaptógenos</h1>
     <p class="hero__description">
-        Disfruta café colombiano de alta calidad fusionado con poderosos nootrópicos y adaptógenos que impulsan tu enfoque, memoria y bienestar.
+      Disfruta café colombiano de alta calidad fusionado con poderosos nootrópicos y adaptógenos que impulsan tu enfoque, memoria y bienestar.
     </p>
+  </div>
 </section>
 
-<section class="products">
-    <div class="product-card">
-        <img src="Pulso_Activo.png" alt="Coffee" class="product-card__img" />
-        <h3>Coffee</h3>
-        <p>Concentración, memoria y claridad mental</p>
-        <span class="product-card__price">$20.000</span>
-        <button class="product-card__btn">Agregar al carrito</button>
-    </div>
-    <div class="product-card">
-        <img src="Senda_Suave.png" alt="Coffee" class="product-card__img" />
-        <h3>Coffee</h3>
-        <p>Concentración, memoria y claridad mental</p>
-        <span class="product-card__price">$20.000</span>
-        <button class="product-card__btn">Agregar al carrito</button>
-    </div>
-    <div class="product-card">
-        <img src="Brisa_Clara.png" alt="Coffee" class="product-card__img" />
-        <h3>Coffee</h3>
-        <p>Concentración, memoria y claridad mental</p>
-        <span class="product-card__price">$20.000</span>
-        <button class="product-card__btn">Agregar al carrito</button>
-    </div>
-</section>
+<section class="catalog">
+  <div class="filters">
+    <span class="filters__label">Ordenar por:</span>
 
-<section class="testimonials">
-    <div class="testimonial-card">
-        <img src="/jorge.jpeg" alt="Jorge Muñoz" class="testimonial-card__img" />
-        <h4>Jorge Muñoz</h4>
-        <p class="testimonial-card__text">Este café me ayudó a concentrarme mejor durante el trabajo.</p>
-    </div>
-    <div class="testimonial-card">
-        <img src="maria.jpg" alt="María Hernández" class="testimonial-card__img" />
-        <h4>María Hernández</h4>
-        <p class="testimonial-card__text">Increíble sabor y me siento más alerta sin ansiedad.</p>
-    </div>
-    <div class="testimonial-card">
-        <img src="julio.jpeg" alt="Julio Ruiz" class="testimonial-card__img" />
-        <h4>Julio Ruiz</h4>
-        <p class="testimonial-card__text">Es mi ritual de cada mañana para empezar con energía.</p>
-    </div>
-</section>
+    <app-select
+      [options]="categoryOptions"
+      [value]="selectedCategory()"
+      placeholder="Categoría"
+      ariaLabel="Filtrar por categoría"
+      (valueChange)="onCategoryChange($event)"
+    />
 
+    <app-select
+      [options]="orderOptions"
+      [value]="selectedOrder()"
+      placeholder="Precio"
+      ariaLabel="Ordenar por precio"
+      (valueChange)="onOrderChange($event)"
+    />
+  </div>
+
+  @for (section of visibleSections(); track section.key) {
+    <section class="category">
+      <h2 class="category__title">{{ section.title }}</h2>
+      <p class="category__description">{{ section.description }}</p>
+
+      <div class="category__grid">
+        @for (product of section.products; track product.id) {
+          <app-product-card [product]="product" (addToCart)="onAddToCart($event)" />
+        }
+      </div>
+    </section>
+  }
+</section>

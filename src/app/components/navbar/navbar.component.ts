@@ -1,11 +1,29 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, HostListener, inject, signal } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  imports: [RouterLink]
+  imports: [RouterModule]
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  menuOpen = false;
+  scrolled = signal(false);
+
+  cart = inject(CartService);
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
+  @HostListener('window:scroll')
+  onScroll() {
+    this.scrolled.set(window.scrollY > 8);
+  }
+}

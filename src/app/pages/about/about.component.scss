@@ -1,269 +1,177 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    background-color: #121212;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .about {
-  
-    &__title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      margin-top: 3rem;
-      color: #000000;
-    }
-  
-    &__intro {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-      margin-bottom: 3rem;
-      background-color: #C5906F;
-      padding: 2rem;
-    }
-  
-    &__intro-image img {
-      width: 100%;
-      max-width: 600px;
-      border-radius: 10px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    }
-  
-    &__intro-text {
-      max-width: 800px;
-      text-align: center;
-  
-      h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        color: #ffccbc;
-      }
-  
-      p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #000000;
-      }
-    }
-  
-    .about__mission-vision {
-  background-color: #f2f2f2;
-  padding: 2rem 1rem;
-  margin-bottom: 3rem;
+@use "../../../styles/mixins" as *;
 
-  .about__subtitle {
+.about {
+  &__section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+
+    @include up(md) {
+      padding: 4rem 2rem;
+    }
+  }
+
+  &__title {
+    margin: 0 0 2rem;
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #000;
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    @include up(md) {
+      margin-bottom: 3rem;
+      font-size: 1.5rem;
+    }
   }
 
-  .about__mv-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    perspective: 1100px;
+  &__hint {
+    margin: 1.5rem 0 0;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.75;
+  }
+}
+
+// ---------- Historia ----------
+.story {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+
+    @include up(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
   }
 
-  .about__mv-card {
+  &__item::before {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(
+      to right,
+      var(--color-brown) 0 18%,
+      var(--color-tan) 18% 100%
+    );
+  }
+
+  &__number {
+    font-size: 0.9rem;
+  }
+
+  &__heading {
+    margin: 1.5rem 0 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+// ---------- Misión y Visión (tarjetas que giran) ----------
+.values {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+
+  @include up(md) {
+    gap: 4rem;
+  }
+}
+
+.value-card {
+  width: 220px;
+  height: 300px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  perspective: 1000px;
+
+  &__inner {
     position: relative;
-    width: 200px;
-    height: 280px;
+    display: block;
+    width: 100%;
+    height: 100%;
     transform-style: preserve-3d;
-    transition: transform 1s;
+    transition: transform 0.8s;
   }
 
-  .about__mv-card:hover {
+  &--flipped &__inner {
     transform: rotateY(180deg);
   }
 
-  .card__front,
-  .card__back {
+  &__face {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px #0002;
-    background-color: #fff;
-    padding: 1rem;
+    inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .card__front {
-    z-index: 2;
-    transform: rotateY(0deg);
-  }
-
-  .card__back {
-    transform: rotateY(180deg);
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: 12px;
     text-align: center;
-    color: #333;
-    padding: 1rem;
-    background-color: #c68b6d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    &--front {
+      background-color: var(--color-surface);
+    }
+
+    &--back {
+      background-color: var(--color-brown);
+      color: var(--color-cream);
+      transform: rotateY(180deg);
+    }
   }
 
-  .card__worker {
-    max-width: 100px;
-    margin-bottom: 0.5rem;
+  &__img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: contain;
   }
 
-  .card__worker img {
-    width: 100%;
-    height: auto;
-  }
-
-  .card__data span {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #3e2723;
-  }
-
-  .card__back span {
+  &__title {
+    font-family: var(--font-heading);
     font-size: 1rem;
-    line-height: 1.3;
-    color: #fff;
+    font-weight: 600;
   }
 
-  @media (min-width: 768px) {
-    .about__mv-content {
-      flex-direction: row;
-      justify-content: center;
+  &__text {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__inner {
+      transition: none;
     }
   }
 }
 
-      
-      
-  
-    &__fungi {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #C5906F;
-      border-radius: 0 40px 40px 0;
-      padding: 2rem;
-      margin-right: 3rem;
-      margin-bottom: 3rem;
-      gap: 2rem;
-  
-      &-text {
-        color: #e0e0e0;
-        text-align: center;
-  
-        h2 {
-          font-size: 2rem;
-          margin-bottom: 1rem;
-          color: #ffccbc;
-        }
-  
-        p {
-          font-size: 1.1rem;
-          line-height: 1.6;
-          max-width: 600px;
-          margin: 0 auto;
-          color: #000000;
-        }
-      }
-  
-      &-image img {
-        width: 100%;
-        max-width: 450px;
-        border-radius: 10px;
-        object-fit: cover;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      }
-  
-      @media (min-width: 768px) {
-        flex-direction: row;
-        justify-content: space-between;
-  
-        &-text {
-          max-width: 50%;
-          text-align: left;
-        }
-  
-        &-image {
-          max-width: 45%;
-        }
-      }
-    }
-  
-    &__team {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      padding: 3.5rem;
-      margin: 3rem 0 3rem 0;
-      background-color: #C5906F;
-  
-      &-member {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        background-color: #F7F3EF;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  
-        img {
-          width: 120px;
-          height: 120px;
-          object-fit: cover;
-          margin-bottom: 1rem;
-          border-radius: 8px;
-        }
-  
-        h3 {
-          font-size: 1.5rem;
-          margin-bottom: 0.5rem;
-          color: #000000;
-        }
-  
-        p {
-          font-size: 1rem;
-          color: #000000;
-          line-height: 1.5;
-        }
-      }
-  
-      @media (min-width: 768px) {
-        flex-direction: row;
-        justify-content: space-between;
-  
-        &-member {
-          width: 30%;
-        }
-      }
-    }
-  
-    @media (min-width: 768px) {
-      &__intro {
-        flex-direction: row;
-        justify-content: center;
-  
-        &-text {
-          text-align: left;
-        }
-      }
-  
-      &__mission-vision &-content {
-        flex-direction: row;
-        justify-content: center;
-      }
-    }
+// ---------- Equipo ----------
+.team {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 560px;
+  margin: 0 auto;
+
+  @include up(lg) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: none;
   }
-  
+}

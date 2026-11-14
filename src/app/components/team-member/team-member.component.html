@@ -1,1 +1,5 @@
-<p>team-member works!</p>
+<article class="member">
+  <img class="member__photo" [src]="photo()" [alt]="'Foto de ' + name()" loading="lazy" />
+  <h3 class="member__name">{{ name() }}</h3>
+  <p class="member__description">{{ description() }}</p>
+</article>

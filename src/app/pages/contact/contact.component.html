@@ -1,29 +1,71 @@
-<section class="form" id="contact">
-    <h2 class="form__title">Contacto</h2>
-    <form class="form__form">
-      <div class="form__input-container">
-        <label for="name">Nombres</label>
-        <input type="text" id="name" name="name" placeholder="John" required />
+<div class="page-banner" aria-hidden="true"></div>
+
+<section class="contact">
+  <h1 class="contact__heading">Ponte en contacto</h1>
+
+  <div class="contact__layout">
+    <!-- Información -->
+    <div class="contact__info">
+      <h2 class="contact__title">Coméntanos</h2>
+      <p class="contact__text">
+        Cualquier inquietud que tengas sobre nuestros productos o si tienes sugerencias son bienvenidas.
+      </p>
+    </div>
+
+    <!-- Formulario -->
+    <form class="contact__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Nombre</label>
+          <input id="name" type="text" formControlName="name" autocomplete="given-name" placeholder="Tu nombre"
+                 [attr.aria-invalid]="hasError('name')" />
+          @if (hasError('name')) {
+            <p class="field__error" role="alert">Ingresa tu nombre.</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="lastname">Apellido</label>
+          <input id="lastname" type="text" formControlName="lastname" autocomplete="family-name" placeholder="Tu apellido"
+                 [attr.aria-invalid]="hasError('lastname')" />
+          @if (hasError('lastname')) {
+            <p class="field__error" role="alert">Ingresa tu apellido.</p>
+          }
+        </div>
       </div>
-  
-      <div class="form__input-container">
-        <label for="lastname">Apellidos</label>
-        <input type="text" id="lastname" name="lastname" placeholder="Doe" required />
+
+      <div class="field">
+        <label for="email">Correo electrónico</label>
+        <input id="email" type="email" formControlName="email" autocomplete="email"  placeholder="tucorreo@ejemplo.com"
+               [attr.aria-invalid]="hasError('email')" />
+        @if (hasError('email')) {
+          <p class="field__error" role="alert">Ingresa un correo válido.</p>
+        }
       </div>
-  
-      <div class="form__input-container">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="mail@example.com" required />
+
+      <div class="field">
+        <label for="message">Mensaje</label>
+        <textarea id="message" rows="5" formControlName="message" placeholder="Cuéntanos cómo podemos ayudarte..."
+                  [attr.aria-invalid]="hasError('message')"></textarea>
+        @if (hasError('message')) {
+          <p class="field__error" role="alert">Escribe un mensaje de al menos 10 caracteres.</p>
+        }
       </div>
-  
-      <div class="form__input-container">
-        <label for="message">Comentarios</label>
-        <textarea id="message" name="message" placeholder="Tu mensaje..." required></textarea>
-      </div>
-  
-      <div class="form__input-container form__submit-container">
-        <input type="submit" value="Enviar" />
+
+      <div class="contact__actions">
+        <button type="submit" class="contact__submit" [disabled]="status() === 'sending'">
+          {{ status() === 'sending' ? 'Enviando...' : 'Enviar mensaje' }}
+        </button>
+
+        @if (status() === 'success') {
+          <p class="contact__feedback" role="status">¡Gracias! Recibimos tu mensaje y te responderemos pronto.</p>
+        }
+        @if (status() === 'error') {
+          <p class="contact__feedback contact__feedback--error" role="alert">
+            No pudimos enviar tu mensaje. Inténtalo de nuevo en unos minutos.
+          </p>
+        }
       </div>
     </form>
-  </section>
-  
+  </div>
+</section>
